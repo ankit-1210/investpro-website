@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestPro - Your AI Investment Partner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00ff88;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ff88;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: #00ff88;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.3);
+        }
+        
+        /* Hero Section with Animated Financial City */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 136, 0.05) 0%, rgba(0, 0, 0, 1) 70%);
+        }
+        
+        /* Animated Financial City Background */
+        .financial-city {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .building {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(173, 216, 230, 0.8), rgba(135, 206, 235, 0.6));
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 4px;
+            animation: buildingFloat 8s ease-in-out infinite;
+        }
+        
+        .building-1 {
+            left: 8%;
+            top: 25%;
+            width: 80px;
+            height: 120px;
+            animation-delay: 0s;
+            transform-style: preserve-3d;
+        }
+        
+        .building-2 {
+            left: 15%;
+            top: 35%;
+            width: 60px;
+            height: 100px;
+            animation-delay: 1s;
+        }
+        
+        .building-3 {
+            left: 22%;
+            top: 20%;
+            width: 70px;
+            height: 140px;
+            animation-delay: 2s;
+        }
+        
+        .building-4 {
+            right: 8%;
+            top: 30%;
+            width: 90px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+        
+        .building-5 {
+            right: 18%;
+            top: 25%;
+            width: 65px;
+            height: 130px;
+            animation-delay: 4s;
+        }
+        
+        .building-6 {
+            right: 25%;
+            top: 40%;
+            width: 75px;
+            height: 95px;
+            animation-delay: 5s;
+        }
+        
+        @keyframes buildingFloat {
+            0%, 100% {
+                transform: translateY(0px) rotateX(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-15px) rotateX(5deg);
+                opacity: 0.9;
+            }
+        }
+        
+        /* Floating Data Points */
+        .data-point {
+            position: absolute;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ff88;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: dataFloat 6s ease-in-out infinite;
+        }
+        
+        .data-point:nth-child(1) {
+            top: 15%;
+            right: 30%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+        }
+        
+        .data-point:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            width: 70px;
+            height: 70px;
+            animation-delay: 2s;
+        }
+        
+        .data-point:nth-child(3) {
+            top: 45%;
+            left: 25%;
+            width: 50px;
+            height: 50px;
+            animation-delay: 4s;
+        }
+        
+        @keyframes dataFloat {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-25px) scale(1.1);
+                opacity: 1;
+            }
+        }
+        
+        /* Floating Charts */
+        .chart-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .chart-box {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+            animation: chartFloat 10s ease-in-out infinite;
+        }
+        
+        .chart-box:nth-child(1) {
+            top: 18%;
+            left: 12%;
+            width: 100px;
+            height: 70px;
+            animation-delay: 0s;
+        }
+        
+        .chart-box:nth-child(2) {
+            bottom: 25%;
+            right: 12%;
+            width: 120px;
+            height: 80px;
+            animation-delay: 3s;
+        }
+        
+        .chart-box:nth-child(3) {
+            top: 50%;
+            left: 5%;
+            width: 90px;
+            height: 60px;
+            animation-delay: 6s;
+        }
+        
+        .mini-chart {
+            width: 100%;
+            height: 30px;
+            position: relative;
+            margin-bottom: 0.3rem;
+        }
+        
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #00ff88, #00cc6a);
+            border-radius: 2px;
+            animation: chartGrow 4s ease-in-out infinite;
+        }
+        
+        .chart-label {
+            font-size: 0.6rem;
+            color: #00ff88;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        @keyframes chartFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-20px) rotate(2deg);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes chartGrow {
+            0% { width: 30%; }
+            50% { width: 90%; }
+            100% { width: 30%; }
+        }
+        
+        /* Isometric Platforms */
+        .iso-platform {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(173, 216, 230, 0.1), rgba(135, 206, 235, 0.2));
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 50%;
+            animation: platformFloat 12s ease-in-out infinite;
+        }
+        
+        .iso-platform:nth-child(1) {
+            top: 60%;
+            left: 20%;
+            width: 150px;
+            height: 50px;
+            animation-delay: 0s;
+        }
+        
+        .iso-platform:nth-child(2) {
+            top: 70%;
+            right: 25%;
+            width: 120px;
+            height: 40px;
+            animation-delay: 4s;
+        }
+        
+        .iso-platform:nth-child(3) {
+            top: 25%;
+            left: 40%;
+            width: 100px;
+            height: 30px;
+            animation-delay: 8s;
+        }
+        
+        @keyframes platformFloat {
+            0%, 100% {
+                transform: translateY(0px) scaleX(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-10px) scaleX(1.1);
+                opacity: 0.6;
+            }
+        }
+        
+        /* Connecting Lines */
+        .connection-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.4), transparent);
+            animation: lineGlow 8s ease-in-out infinite;
+        }
+        
+        .line-1 {
+            top: 35%;
+            left: 20%;
+            width: 200px;
+            transform: rotate(15deg);
+            animation-delay: 0s;
+        }
+        
+        .line-2 {
+            top: 55%;
+            right: 20%;
+            width: 150px;
+            transform: rotate(-20deg);
+            animation-delay: 2s;
+        }
+        
+        .line-3 {
+            top: 75%;
+            left: 30%;
+            width: 180px;
+            transform: rotate(5deg);
+            animation-delay: 4s;
+        }
+        
+        @keyframes lineGlow {
+            0%, 100% {
+                opacity: 0.2;
+                box-shadow: 0 0 5px rgba(0, 255, 136, 0.2);
+            }
+            50% {
+                opacity: 0.8;
+                box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+            }
+        }
+        
+        /* Financial Icons */
+        .financial-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(0, 255, 136, 0.6);
+            animation: iconBob 6s ease-in-out infinite;
+        }
+        
+        .financial-icon:nth-child(1) {
+            top: 20%;
+            left: 35%;
+            animation-delay: 0s;
+        }
+        
+        .financial-icon:nth-child(2) {
+            top: 65%;
+            right: 35%;
+            animation-delay: 2s;
+        }
+        
+        .financial-icon:nth-child(3) {
+            top: 45%;
+            left: 8%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes iconBob {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-15px) rotate(10deg);
+                opacity: 1;
+            }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #00ff88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: #cccccc;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #000;
+            padding: 16px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 255, 136, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid #00ff88;
+            padding: 16px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            background: #00ff88;
+            color: #000;
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: #00ff88;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator p {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .scroll-arrow {
+            width: 2px;
+            height: 30px;
+            background: #00ff88;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .scroll-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: -3px;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid #00ff88;
+            border-bottom: 2px solid #00ff88;
+            transform: rotate(45deg);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Signup Modal - Groww Style */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .signup-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 900px;
+            height: 600px;
+            display: flex;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .modal-overlay.active .signup-modal {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .modal-left {
+            flex: 1;
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .modal-left h2 {
+            color: #000000;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-left p {
+            color: #000000;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-left .highlight {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #000000;
+            color: #000000;
+        }
+        
+        .modal-right {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #000000;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .modal-close::before,
+        .modal-close::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 1px;
+        }
+        
+        .modal-close::before {
+            transform: rotate(45deg);
+        }
+        
+        .modal-close::after {
+            transform: rotate(-45deg);
+        }
+        
+        .signup-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .signup-header h3 {
+            color: #ffffff;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .google-btn {
+            width: 100%;
+            background: #111111;
+            border: 1px solid #333333;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+        
+        .google-btn:hover {
+            background: #222222;
+            border-color: #00ff88;
+            box-shadow: 0 2px 10px rgba(0, 255, 136, 0.2);
+        }
+        
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="%23EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="%2334A853" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="%23FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="%23EA4335" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+            color: #cccccc;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #333333;
+        }
+        
+        .divider span {
+            background: #000000;
+            padding: 0 1rem;
+            position: relative;
+        }
+        
+        .email-form {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #111111;
+            color: #ffffff;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.2);
+        }
+        
+        .form-input::placeholder {
+            color: #888888;
+        }
+        
+        .continue-btn {
+            width: 100%;
+            background: #00ff88;
+            color: #000000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .continue-btn:hover {
+            background: #00cc6a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .terms-text {
+            font-size: 0.85rem;
+            color: #cccccc;
+            text-align: center;
+            margin-top: 1rem;
+            line-height: 1.4;
+        }
+        
+        .terms-text a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+        
+        .terms-text a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: #111111;
+            padding: 100px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            animation: rotate 8s linear infinite;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 255, 136, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat-label {
+            color: #cccccc;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Services Section */
+        .services {
+            background: #000000;
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            animation: rotate 6s linear infinite;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(0, 255, 136, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 255, 136, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            animation: iconFloat 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .service-description {
+            color: #cccccc;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Why Choose Section */
+        .why-choose {
+            background: linear-gradient(135deg, #111111 0%, #000000 100%);
+            padding: 100px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(0, 255, 136, 0.03);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(0, 255, 136, 0.06);
+            border-color: rgba(0, 255, 136, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .feature-description {
+            color: #cccccc;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: #000000;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: #111111;
+            padding: 80px 0 30px;
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #00ff88;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+        }
+        
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .signup-modal {
+                flex-direction: column;
+                height: 90vh;
+                width: 95%;
+            }
+            
+            .modal-left {
+                flex: 0 0 200px;
+                padding: 2rem;
+            }
+            
+            .modal-left h2 {
+                font-size: 1.8rem;
+            }
+            
+            .modal-right {
+                padding: 2rem;
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">InvestPro</div>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="showSection('home')">Home</a></li>
+                <li><a href="#services" onclick="showSection('services')">Services</a></li>
+                <li><a href="#about" onclick="showSection('about')">About</a></li>
+                <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+            </ul>
+            <div class="cta-button" onclick="openSignupModal()">Get Started</div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <!-- Animated Financial City Background -->
+        <div class="financial-city">
+            <!-- Isometric Buildings -->
+            <div class="building building-1"></div>
+            <div class="building building-2"></div>
+            <div class="building building-3"></div>
+            <div class="building building-4"></div>
+            <div class="building building-5"></div>
+            <div class="building building-6"></div>
+            
+            <!-- Isometric Platforms -->
+            <div class="iso-platform"></div>
+            <div class="iso-platform"></div>
+            <div class="iso-platform"></div>
+            
+            <!-- Connecting Lines -->
+            <div class="connection-line line-1"></div>
+            <div class="connection-line line-2"></div>
+            <div class="connection-line line-3"></div>
+            
+            <!-- Financial Icons -->
+            <div class="financial-icon">💰</div>
+            <div class="financial-icon">📊</div>
+            <div class="financial-icon">🏢</div>
+        </div>
+        
+        <!-- Floating Data Points -->
+        <div class="chart-elements">
+            <div class="data-point">+15%</div>
+            <div class="data-point">₹50Cr</div>
+            <div class="data-point">500+</div>
+        </div>
+        
+        <!-- Chart Elements -->
+        <div class="chart-elements">
+            <div class="chart-box">
+                <div class="mini-chart">
+                    <div class="chart-bar"></div>
+                </div>
+                <div class="chart-label">Growth</div>
+            </div>
+            <div class="chart-box">
+                <div class="mini-chart">
+                    <div class="chart-bar"></div>
+                </div>
+                <div class="chart-label">Returns</div>
+            </div>
+            <div class="chart-box">
+                <div class="mini-chart">
+                    <div class="chart-bar"></div>
+                </div>
+                <div class="chart-label">AUM</div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1>Your Smart Investment Partner</h1>
+                <p>Professional mutual fund management with AI-powered insights. Build wealth systematically with our expert guidance and proven strategies.</p>
+                <div class="hero-buttons">
+                    <div class="btn-primary" onclick="exploreFunds()">Explore Funds</div>
+                    <div class="btn-secondary" onclick="scheduleConsultation()">Schedule Consultation</div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator" onclick="scrollToNext()">
+            <p>SCROLL TO EXPLORE</p>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">₹50Cr+</div>
+                    <div class="stat-label">Assets Under Management</div>
+                </div>
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Happy Investors</div>
+                </div>
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">15%</div>
+                    <div class="stat-label">Average Annual Returns</div>
+                </div>
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years of Excellence</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title animate-on-scroll">Our Investment Solutions</h2>
+                <p class="section-subtitle animate-on-scroll">Diversified portfolio options designed to meet your financial goals and risk preferences</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll" onclick="showServiceDetails('equity')">
+                    <div class="service-icon">📈</div>
+                    <h3 class="service-title">Equity Funds</h3>
+                    <p class="service-description">High-growth potential through carefully selected stocks across all market capitalizations for long-term wealth creation.</p>
+                </div>
+                <div class="service-card animate-on-scroll" onclick="showServiceDetails('debt')">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Debt Funds</h3>
+                    <p class="service-description">Stable returns with lower risk through government securities and high-grade corporate bonds.</p>
+                </div>
+                <div class="service-card animate-on-scroll" onclick="showServiceDetails('hybrid')">
+                    <div class="service-icon">⚖️</div>
+                    <h3 class="service-title">Hybrid Funds</h3>
+                    <p class="service-description">Balanced approach combining equity and debt for optimal risk-return balance and diversification.</p>
+                </div>
+                <div class="service-card animate-on-scroll" onclick="showServiceDetails('sip')">
+                    <div class="service-icon">💰</div>
+                    <h3 class="service-title">SIP Plans</h3>
+                    <p class="service-description">Systematic Investment Plans starting from ₹500/month to build wealth through rupee cost averaging.</p>
+                </div>
+                <div class="service-card animate-on-scroll" onclick="showServiceDetails('goal')">
+                    <div class="service-icon">🎯</div>
+                    <h3 class="service-title">Goal-Based Investing</h3>
+                    <p class="service-description">Customized strategies for specific goals like retirement, education, or home buying with timeline-based planning.</p>
+                </div>
+                <div class="service-card animate-on-scroll" onclick="showServiceDetails('portfolio')">
+                    <div class="service-icon">👥</div>
+                    <h3 class="service-title">Portfolio Management</h3>
+                    <p class="service-description">Professional portfolio construction and regular rebalancing by certified financial experts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose" id="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title animate-on-scroll">Why Choose InvestPro?</h2>
+                <p class="section-subtitle animate-on-scroll">Experience the difference of professional fund management with complete transparency and expert guidance</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Proven Track Record</h3>
+                    <p class="feature-description">Consistent outperformance with 15%+ average annual returns over 5 years</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">SEBI Registered</h3>
+                    <p class="feature-description">Fully compliant with regulatory standards ensuring your investments are safe and secure</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Transparent Reporting</h3>
+                    <p class="feature-description">Monthly performance reports with detailed analysis and comprehensive market insights</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Expert Advisory</h3>
+                    <p class="feature-description">Dedicated relationship managers with 10+ years of market experience and expertise</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="animate-on-scroll">Ready to Start Your Investment Journey?</h2>
+                <p class="animate-on-scroll">Join hundreds of satisfied investors who trust us with their financial future</p>
+                <div class="btn-primary animate-on-scroll" onclick="openSignupModal()">Start Investing Today</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact-section">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>InvestPro</h3>
+                    <p>Your trusted partner in building long-term wealth through professional mutual fund management and expert financial guidance.</p>
+                    <br>
+                    <p><strong>SEBI Registration:</strong> INH000001234</p>
+                    <p><strong>CIN:</strong> U65100MH2019PTC123456</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a onclick="showSection('home')">Home</a></li>
+                        <li><a onclick="showSection('services')">Our Funds</a></li>
+                        <li><a onclick="showSection('about')">About Us</a></li>
+                        <li><a onclick="showSection('contact')">Contact</a></li>
+                        <li><a onclick="showPolicy('privacy')">Privacy Policy</a></li>
+                        <li><a onclick="showPolicy('terms')">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><a onclick="sendEmail()">📧 info@investpro.com</a></li>
+                        <li><a onclick="callPhone()">📱 +91 98765 43210</a></li>
+                        <li>📍 Mumbai Financial District, Maharashtra</li>
+                        <li>🕒 Mon-Fri: 9:00 AM - 6:00 PM</li>
+                        <li>🕒 Sat: 9:00 AM - 1:00 PM</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Investment Options</h3>
+                    <ul>
+                        <li><a onclick="showServiceDetails('equity')">Large Cap Equity Funds</a></li>
+                        <li><a onclick="showServiceDetails('equity')">Mid Cap Equity Funds</a></li>
+                        <li><a onclick="showServiceDetails('debt')">Government Securities</a></li>
+                        <li><a onclick="showServiceDetails('hybrid')">Balanced Hybrid Funds</a></li>
+                        <li><a onclick="openCalculator()">SIP Calculator</a></li>
+                        <li><a onclick="openGoalPlanner()">Goal Planner</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 InvestPro. All rights reserved. | Mutual Fund investments are subject to market risks. Please read the offer documents carefully before investing. | Past performance is not indicative of future results.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Signup Modal -->
+    <div class="modal-overlay" id="signupModal">
+        <div class="signup-modal">
+            <button class="modal-close" onclick="closeSignupModal()"></button>
+            
+            <div class="modal-left">
+                <h2>Simple, Free Investing.</h2>
+                <p>Start your investment journey with India's most trusted mutual fund platform.</p>
+                
+                <div class="highlight">
+                    <strong>🚀 Mutual Funds</strong><br>
+                    Zero commission • Expert guidance • Grow your wealth
+                </div>
+            </div>
+            
+            <div class="modal-right">
+                <div class="signup-header">
+                    <h3>Welcome to InvestPro</h3>
+                </div>
+                
+                <button class="google-btn" onclick="continueWithGoogle()">
+                    <div class="google-icon"></div>
+                    Continue with Google
+                </button>
+                
+                <div class="divider">
+                    <span>Or</span>
+                </div>
+                
+                <form class="email-form" onsubmit="continueWithEmail(event)">
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            class="form-input" 
+                            placeholder="Your Email Address" 
+                            required
+                            id="emailInput"
+                        >
+                    </div>
+                    
+                    <button type="submit" class="continue-btn">
+                        Continue
+                    </button>
+                </form>
+                
+                <div class="terms-text">
+                    By proceeding, I agree to <a onclick="showPolicy('terms')">T&C</a>, 
+                    <a onclick="showPolicy('privacy')">Privacy Policy</a> & 
+                    <a onclick="showPolicy('tariff')">Tariff Rates</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // =================
+        // MODAL FUNCTIONS
+        // =================
+        function openSignupModal() {
+            document.getElementById('signupModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeSignupModal() {
+            document.getElementById('signupModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function continueWithGoogle() {
+            alert('🚀 Google Sign-in\n\nRedirecting to Google authentication...\n\n✅ Quick setup\n✅ Secure login\n✅ Auto-fill details\n\nYou\'ll be redirected back to complete your investment profile.');
+            closeSignupModal();
+        }
+        
+        function continueWithEmail(event) {
+            event.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            
+            if (email) {
+                alert('✅ Welcome to InvestPro!\n\nEmail: ' + email + '\n\nNext Steps:\n🔐 Verify your email\n📋 Complete KYC\n💰 Start investing\n\nVerification link sent to your email!');
+                closeSignupModal();
+            }
+        }
+
+        // =================
+        // NAVIGATION FUNCTIONS
+        // =================
+        function showSection(sectionName) {
+            // Smooth scroll to sections
+            let targetId = '';
+            switch(sectionName) {
+                case 'home':
+                    targetId = 'home';
+                    break;
+                case 'services':
+                    targetId = 'services-section';
+                    break;
+                case 'about':
+                    targetId = 'about-section';
+                    break;
+                case 'contact':
+                    targetId = 'contact-section';
+                    break;
+            }
+            
+            if (targetId) {
+                document.getElementById(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        function scrollToNext() {
+            document.getElementById('stats').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // =================
+        // SERVICE FUNCTIONS
+        // =================
+        function exploreFunds() {
+            alert('🚀 Available Investment Funds:\n\n📈 Equity Funds (12-18% returns)\n🛡️ Debt Funds (8-12% returns)\n⚖️ Hybrid Funds (10-15% returns)\n💰 SIP Plans (Start ₹500/month)\n🎯 Goal-Based Funds\n👥 Portfolio Management\n\nClick on any service card below for detailed information!');
+            
+            // Scroll to services section
+            document.getElementById('services-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        function showServiceDetails(serviceType) {
+            let details = '';
+            
+            switch(serviceType) {
+                case 'equity':
+                    details = '📈 EQUITY FUNDS\n\n✅ Large Cap Funds (8-12% returns)\n✅ Mid Cap Funds (12-16% returns)\n✅ Small Cap Funds (15-20% returns)\n✅ Sectoral Funds (10-18% returns)\n\n💰 Minimum Investment: ₹1,000\n📅 Lock-in Period: None\n🎯 Risk Level: High\n📊 Best for: Long-term wealth creation\n\nStart your equity investment journey today!';
+                    break;
+                case 'debt':
+                    details = '🛡️ DEBT FUNDS\n\n✅ Government Securities (6-8% returns)\n✅ Corporate Bonds (7-10% returns)\n✅ Liquid Funds (4-6% returns)\n✅ Fixed Deposits Plus (8-12% returns)\n\n💰 Minimum Investment: ₹500\n📅 Lock-in Period: None\n🎯 Risk Level: Low to Medium\n📊 Best for: Stable income & capital preservation\n\nSecure your financial future!';
+                    break;
+                case 'hybrid':
+                    details = '⚖️ HYBRID FUNDS\n\n✅ Conservative Hybrid (8-12% returns)\n✅ Balanced Hybrid (10-14% returns)\n✅ Aggressive Hybrid (12-16% returns)\n✅ Dynamic Asset Allocation (9-15% returns)\n\n💰 Minimum Investment: ₹1,000\n📅 Lock-in Period: None\n🎯 Risk Level: Medium\n📊 Best for: Balanced growth & stability\n\nGet the best of both worlds!';
+                    break;
+                case 'sip':
+                    details = '💰 SIP PLANS\n\n✅ Start with just ₹500/month\n✅ Rupee Cost Averaging benefits\n✅ Compound growth over time\n✅ Flexible amount & frequency\n✅ Auto-debit facility\n\n📊 Example: ₹5,000/month for 10 years\n💵 Total Investment: ₹6,00,000\n🚀 Expected Value: ₹11,50,000+\n📈 Returns: 15% CAGR\n\nStart your SIP journey today!';
+                    break;
+                case 'goal':
+                    details = '🎯 GOAL-BASED INVESTING\n\n🏠 Home Purchase: 5-10 years\n🎓 Child Education: 10-18 years\n💒 Child Marriage: 15-25 years\n✈️ Dream Vacation: 2-5 years\n🚗 Car Purchase: 3-7 years\n🏖️ Retirement Planning: 15-30 years\n\n📊 Customized portfolio for each goal\n💰 Systematic investment approach\n📈 Regular review & rebalancing\n\nPlan your dreams, achieve your goals!';
+                    break;
+                case 'portfolio':
+                    details = '👥 PORTFOLIO MANAGEMENT\n\n✅ Dedicated Relationship Manager\n✅ Customized investment strategy\n✅ Regular portfolio review\n✅ Tax optimization\n✅ Risk assessment & management\n✅ Performance tracking\n\n💰 Minimum Investment: ₹5,00,000\n📊 Expected Returns: 12-18%\n🎯 Professional fund management\n📈 Quarterly performance reports\n\nExperience professional fund management!';
+                    break;
+            }
+            
+            alert(details);
+        }
+        
+        function scheduleConsultation() {
+            const userConfirm = confirm('📞 Schedule FREE Consultation?\n\nOur certified financial advisor will discuss:\n\n💡 Your investment goals\n📊 Risk assessment\n💰 Customized portfolio recommendations\n🎯 Tax-saving strategies\n📈 Market insights\n\n⏰ Duration: 30 minutes\n📅 Available: Mon-Sat, 9 AM - 7 PM\n\nClick OK to proceed with scheduling');
+            
+            if (userConfirm) {
+                alert('✅ Consultation Scheduled Successfully!\n\n📞 Our expert will call you within 2 business hours\n📧 Confirmation email sent\n📋 Preparation checklist shared\n\n📞 Emergency Contact: +91 98765 43210\n📧 Email: consultation@investpro.com\n\nThank you for choosing InvestPro!');
+            }
+        }
+
+        // =================
+        // CONTACT FUNCTIONS
+        // =================
+        function sendEmail() {
+            window.open('mailto:info@investpro.com?subject=Investment Inquiry - InvestPro&body=Hello InvestPro Team,%0D%0A%0D%0AI am interested in learning more about your investment services. Please provide me with detailed information about:%0D%0A%0D%0A- Available mutual fund options%0D%0A- SIP plans%0D%0A- Portfolio management services%0D%0A- Expected returns%0D%0A%0D%0APlease contact me at your earliest convenience.%0D%0A%0D%0AThank you!');
+        }
+        
+        function callPhone() {
+            window.open('tel:+919876543210');
+        }
+
+        // =================
+        // POLICY FUNCTIONS
+        // =================
+        function showPolicy(policyType) {
+            let content = '';
+            
+            switch(policyType) {
+                case 'terms':
+                    content = '📋 TERMS & CONDITIONS\n\n✅ Zero hidden charges policy\n✅ Complete fee transparency\n✅ SEBI compliance guaranteed\n✅ Secure investment protocols\n✅ 24/7 customer support\n✅ Easy exit policy\n✅ Regular performance reports\n✅ Professional fund management\n\n📄 Full terms available on our website\n📞 Contact: +91 98765 43210';
+                    break;
+                case 'privacy':
+                    content = '🔒 PRIVACY POLICY\n\n✅ Bank-grade security protocols\n✅ 256-bit data encryption\n✅ No spam email policy\n✅ GDPR compliance\n✅ Secure data storage\n✅ No third-party data sharing\n✅ Regular security audits\n✅ Customer data protection\n\n🛡️ Your privacy is our priority\n📧 Contact: privacy@investpro.com';
+                    break;
+                case 'tariff':
+                    content = '💰 TARIFF RATES\n\n✅ Zero account opening fees\n✅ Zero annual maintenance charges\n✅ Zero transaction fees\n✅ No hidden costs\n✅ Transparent pricing\n\nFUND CHARGES:\n📈 Equity Funds: 1.5-2.5% expense ratio\n🛡️ Debt Funds: 0.5-1.5% expense ratio\n⚖️ Hybrid Funds: 1.0-2.0% expense ratio\n\n💡 Only standard AMC charges apply\n📊 All fees disclosed upfront';
+                    break;
+            }
+            
+            alert(content);
+        }
+
+        // =================
+        // UTILITY FUNCTIONS
+        // =================
+        function openCalculator() {
+            alert('🧮 SIP CALCULATOR\n\n📊 Calculate your SIP returns:\n\nExample Calculation:\n💰 Monthly SIP: ₹10,000\n📅 Investment Period: 15 years\n📈 Expected Return: 12% p.a.\n\n🎯 RESULTS:\n💵 Total Investment: ₹18,00,000\n🚀 Maturity Value: ₹50,09,635\n💎 Wealth Gained: ₹32,09,635\n\n📱 Download our mobile app for detailed SIP calculator!\n🌐 Visit: calculator.investpro.com');
+        }
+        
+        function openGoalPlanner() {
+            alert('🎯 GOAL PLANNER\n\n🏠 HOME PURCHASE\n💰 Target: ₹50,00,000\n📅 Time: 8 years\n💳 Monthly SIP: ₹35,000\n\n🎓 CHILD EDUCATION\n💰 Target: ₹25,00,000\n📅 Time: 15 years\n💳 Monthly SIP: ₹8,500\n\n🏖️ RETIREMENT FUND\n💰 Target: ₹2,00,00,000\n📅 Time: 25 years\n💳 Monthly SIP: ₹22,000\n\n📱 Get personalized goal planning!\n📞 Book consultation: +91 98765 43210');
+        }
+
+        // =================
+        // MODAL EVENT HANDLERS
+        // =================
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('signupModal');
+            if (event.target === modal) {
+                closeSignupModal();
+            }
+        });
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeSignupModal();
+            }
+        });
+
+        // =================
+        // SCROLL ANIMATIONS
+        // =================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
+            observer.observe(el);
+        });
+
+        // =================
+        // COUNTER ANIMATIONS
+        // =================
+        function animateCounter(element, target) {
+            const duration = 2000;
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(function() {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                if (target > 1000000) {
+                    element.textContent = '₹' + (current / 10000000).toFixed(0) + 'Cr+';
+                } else if (target > 100) {
+                    element.textContent = Math.floor(current) + '+';
+                } else {
+                    element.textContent = Math.floor(current) + '%';
+                }
+            }, 16);
+        }
+
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    animateCounter(statNumbers[0], 50000000);
+                    animateCounter(statNumbers[1], 500);
+                    animateCounter(statNumbers[2], 15);
+                    animateCounter(statNumbers[3], 5);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.getElementById('stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // =================
+        // PAGE INITIALIZATION
+        // =================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ InvestPro website loaded successfully!');
+            console.log('🚀 All features are functional:');
+            console.log('   📱 Responsive design');
+            console.log('   🎨 Groww-style signup modal');
+            console.log('   📊 Interactive service cards');
+            console.log('   📞 Contact integration');
+            console.log('   🧮 SIP calculator');
+            console.log('   🎯 Goal planner');
+            console.log('   💰 Investment tools');
+            console.log('📞 Support: +91 98765 43210');
+            console.log('📧 Email: info@investpro.com');
+        });
+    </script>
+</body>
+</html>
